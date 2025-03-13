@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeVito Measurement Converter</title>
+    <style>
+        body {
+            background-color: #00FF00; /* Bright neon green background */
+            color: #FF0000; /* Painful red text */
+            font-family: Comic Sans MS, Arial;
+            text-align: center;
+        }
+        .container {
+            background: yellow;
+            border: 5px solid blue;
+            padding: 20px;
+            width: 80%;
+            margin: auto;
+        }
+        input, select, button {
+            font-size: 16px;
+            background-color: cyan;
+            border: 2px solid red;
+        }
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            background-color: magenta;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .deVito-img {
+            width: 80px;
+            display: block;
+            margin: auto;
+        }
+        .marquee-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            background-color: orange;
+        }
+        table {
+            width: 100%;
+            background-color: purple;
+            border: 3px solid black;
+        }
+        td {
+            padding: 10px;
+            border: 2px dashed white;
+        }
+    </style>
+</head>
+<body>
+
+    <marquee class="marquee-text">🔥 WELCOME TO THE DEVITO MEASUREMENT SYSTEM 🔥</marquee>
+
+    <table>
+        <tr>
+            <td colspan="3"><h1>💀 The DeVito Measurement Converter 💀</h1></td>
+        </tr>
+        <tr>
+            <td width="33%"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Danny_DeVito_2013.jpg" width="100"></td>
+            <td width="33%">
+                <div class="container">
+                    <p>Enter a length to see how many DeVitos it is!!!</p>
+                    <input type="number" id="inputLength" placeholder="Enter length">
+                    <select id="unit">
+                        <option value="inches">Inches</option>
+                        <option value="feet">Feet</option>
+                        <option value="meters">Meters</option>
+                        <option value="miles">Miles</option>
+                        <option value="kilometers">Kilometers</option>
+                    </select>
+                    <button onclick="convertToDeVitos()">CONVERT!!!</button>
+                    <div class="result" id="output"></div>
+                    <div id="deVitoStack"></div>
+                </div>
+            </td>
+            <td width="33%"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Danny_DeVito_2013.jpg" width="100"></td>
+        </tr>
+    </table>
+
+    <script>
+        function convertToDeVitos() {
+    let inputLength = parseFloat(document.getElementById("inputLength").value);
+    let unit = document.getElementById("unit").value;
+    let inchesPerDeVito = 57.87;
+    let inches;
+
+    switch (unit) {
+        case "inches":
+            inches = inputLength;
+            break;
+        case "feet":
+            inches = inputLength * 12;
+            break;
+        case "meters":
+            inches = inputLength * 39.3701;
+            break;
+        case "miles":
+            inches = inputLength * 63360;
+            break;
+        case "kilometers":
+            inches = inputLength * 39370.1;
+            break;
+        default:
+            inches = inputLength;
+    }
+
+    let deVitos = inches / inchesPerDeVito;
+    let numDeVitos = Math.floor(deVitos);
+    let remainderInches = inches % inchesPerDeVito;
+
+    let outputText = `🌟 THAT'S <strong>${deVitos.toFixed(2)}</strong> DEVITOS! 🌟<br>
+        🤯 THAT'S <strong>${numDeVitos}</strong> FULL DANNY DEVITOS! 🤯<br>
+        📏 PLUS AN EXTRA <strong>${remainderInches.toFixed(2)}</strong> INCHES! 📏`;
+
+    document.getElementById("output").innerHTML = outputText;
+
+    let deVitoStack = document.getElementById("deVitoStack");
+    deVitoStack.innerHTML = "";
+    let numDeVitosToShow = Math.min(numDeVitos, 10);
+
+    for (let i = 0; i < numDeVitosToShow; i++) {
+        let img = document.createElement("img");
+        img.src = "DANNY_DEVITO.jpg";
+        img.alt = "Danny DeVito";
+        img.className = "deVito-img";
+        deVitoStack.appendChild(img);
+    }
+
+    if (numDeVitos > 10) {
+        let moreText = document.createElement("p");
+        moreText.innerHTML = `🔥 ...AND ${numDeVitos - 10} MORE FULL DANNY DEVITOS!!! 🔥`;
+        deVitoStack.appendChild(moreText);
+    }
+
+    // Make the browser speak the result
+    let speech = new SpeechSynthesisUtterance();
+    speech.text = `Whoa whoa whoa! That's ${deVitos.toFixed(2)} Danny DeVitos! 
+        That's ${numDeVitos} full-on, real deal Danny DeVitos plus ${remainderInches.toFixed(2)} inches! 
+        Somebody get me a step ladder!`;
+
+    speech.rate = 1; // Normal speaking rate
+    speech.pitch = 1; // Normal pitch
+    speech.volume = 1; // Full volume
+    window.speechSynthesis.speak(speech);
+}
+
+    </script>
+
+    <marquee class="marquee-text">👀 HOW MANY DEVITOS IS YOUR CAR??? FIND OUT NOW!!! 🚗</marquee>
+
+</body>
+</html>
+
